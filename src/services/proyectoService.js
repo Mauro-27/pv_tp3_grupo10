@@ -1,22 +1,32 @@
-const usuarioService = (() =>{
-    //Array de Usuarios
-    const usuario = [
-        {id:1, nombre:"Mauro", apellido:"Campos", estado: true},
-        {id:2, nombre:"Gabriel", apellido:"Chauque", estado: true},
-        {id:3, nombre:"Lucas", apellido:"Barrientos", estado: true},
-        {id:4, nombre:"Erika", apellido:"Rocha", estado: true},
-        {id:5, nombre:"Alex", apellido:"Robles", estado: true}
+export const proyectoService = (() =>{
+    let proyectos = [
+        {id:1, titulo:"Curso Inicial de HTML", categoria:"Programación", estado: true},
+        {id:2, titulo:"Huerta Escolar Automatizada", categoria:"Robótica", estado: true},
+        {id:3, titulo:"Matemática Interactiva", categoria:"Matemática", estado: true},
+        {id:4, titulo:"Laboratorio Virtual de Ciencias", categoria:"Ciencias", estado: true},
+        {id:5, titulo:"Biblioteca Digital para la Escuela", categoria:"Educación", estado: true}
     ];
 
-    const listarTodosUsuarios = () => {
-        return [...usuario];
+    const obtenerProyectos = () => {
+        return [...proyectos];
+    };
+
+       const agregarProyectos = () => {
+        proyectos.push(nuevoProyecto)
+    };
+
+       const eliminarProyectos = (id) => {
+        proyectos = proyectos.filter(proyectos => proyectos.id !== id);
+    };
+
+       const buscarProyectos = (texto) => {
+            proyectos.titulo.toLowCase().include(texto.toLowCase())
     };
 
     return{
-        listarTodosUsuarios
+        obtenerProyectos,
+        agregarProyectos,
+        eliminarProyectos,
+        buscarProyectos
     }
-
-
 })();
-
-export default usuarioService;
