@@ -1,12 +1,13 @@
-import { useState } from 'react'
+import Footer from "./components/Footer";
 import ListaProyectos from './components/ListaProyectos.jsx'
 import './css/App.css';
+
 function App() {
-  const [count, setCount] = useState(0)
 
   return (
     <div className="app-container">
-        <ListaProyectos />
+      <ListaProyectos />
+      <Footer />
     </div>
   );
 }
