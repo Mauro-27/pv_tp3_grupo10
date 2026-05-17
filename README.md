@@ -2,7 +2,6 @@
 
 ## NOMBRES DE LOS INTEGRANTES (GRUPO 10)
 * Campos Mauro Ismael - [@Mauro-27](https://github.com/Mauro-27)
-* Robles Alexander - [@alexander555-web](https://github.com/alexander555-web)
 * Chauque Gabriel - [@GabriellChau](https://github.com/GabriellChau)
 * Barrientos Lucas - [@lucasbarr13](https://github.com/lucasbarr13)
 * Rocha Erika - [@rochaerika775-cell](https://github.com/rochaerika775-cell)
