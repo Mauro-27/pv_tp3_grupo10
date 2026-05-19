@@ -5,7 +5,7 @@ const DetalleProyecto = ({ proyecto }) =>{
 
     const {titulo, categoria, estado, descripcion, recursos, equipo} = proyecto;
 
-    const parrafo = descripcion ? descripcion.split('\n') : ["Descripcion no disponible."];
+    const parrafos = descripcion ? descripcion.split('\n') : ["Descripcion no disponible."];
 
     return(
         <div className="novedades detalle-container">
@@ -45,4 +45,3 @@ const DetalleProyecto = ({ proyecto }) =>{
 };
 
 export default DetalleProyecto;
-

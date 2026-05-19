@@ -1,5 +1,6 @@
 import { proyectoService } from "../services/proyectoService.js";
 import { useState } from "react";
+import ProyectoCard from "./ProyectoCard.jsx";
 
 const ListaProyectos = () => {
 
@@ -10,6 +11,9 @@ const ListaProyectos = () => {
     categoria: "",
     estado: "Activo"
   });
+
+  // Desestructuración en el manejo de los estados del formulario
+  const { titulo, categoria, estado } = proyectoFormulario;
 
   const [busqueda, setBusqueda] = useState("");
 
@@ -83,7 +87,7 @@ const ListaProyectos = () => {
             name="titulo"
             className="input-form"
             placeholder="Título del proyecto"
-            value={proyectoFormulario.titulo}
+            value={titulo}
             onChange={manejarCambio}
             required
           />
@@ -93,7 +97,7 @@ const ListaProyectos = () => {
             name="categoria"
             className="input-form"
             placeholder="Categoría (ej: Robótica)"
-            value={proyectoFormulario.categoria}
+            value={categoria}
             onChange={manejarCambio}
             required
           />
@@ -101,7 +105,7 @@ const ListaProyectos = () => {
           <select
             name="estado"
             className="select-form"
-            value={proyectoFormulario.estado}
+            value={estado}
             onChange={manejarCambio}
           >
             <option value="Activo">Activo</option>
@@ -122,18 +126,11 @@ const ListaProyectos = () => {
           <p>No se encontraron proyectos.</p>
         ) : (
           proyectos.map((proyecto) => (
-            <div key={proyecto.id} className="proyecto-card">
-              <h3>{proyecto.titulo}</h3>
-              <p><strong>Categoría:</strong> {proyecto.categoria}</p>
-              <p><strong>Estado:</strong> {proyecto.estado}</p>
-              
-              <button 
-                className="btn-eliminar"
-                onClick={() => manejarEliminar(proyecto.id)}
-              >
-                Eliminar
-              </button>
-            </div>
+            <ProyectoCard
+              key={proyecto.id}
+              proyecto={proyecto}
+              onEliminar={manejarEliminar}
+            />
           ))
         )}
       </div>
