@@ -185,7 +185,7 @@ main {
 }
 
 .btn-eliminar {
-    margin-top: 15px;
+    /*margin-top: 15px;
     padding: 6px 12px;
     background-color: #dc2626;
     color: var(--white);
@@ -193,11 +193,53 @@ main {
     border-radius: 4px;
     cursor: pointer;
     font-family: inherit;
+    transition: background-color 0.3s ease;*/
+
+    flex: 1;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
     transition: background-color 0.3s ease;
 }
 
 .btn-eliminar:hover {
-    background-color: #b91c1c; 
+    /*background-color: #b91c1c; */
+    background-color: #dc2626;
+}
+
+/* Contenedor de los botones en la Card */
+.opcionesCard {
+    display: flex;
+    gap: 12px;
+    margin-top: auto;
+    padding-top: 16px;
+    width: 100%;
+}
+
+/* El boton de Ver Detalle */
+.btn-detalle {
+    flex: 1;
+    background-color: var(--bg-light);
+    color: var(--primary-color);
+    border: 1px solid var(--primary-color);
+    padding: 8px 12px;
+    border-radius: 6px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: all 0.3s ease;
+}
+
+.btn-detalle:hover {
+    background-color: var(--primary-color);
+    color: var(--white);
+}
+
+.btn-eliminar {
+    flex: 1;
 }
 
 
