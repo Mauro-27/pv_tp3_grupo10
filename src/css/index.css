@@ -233,6 +233,11 @@ footer a:hover {
     color: var(--white);
 }
 
+
+
+
+
+/* Adaptabilidad para móviles */
 @media (max-width: 600px) {
     
     .proyecto-card {

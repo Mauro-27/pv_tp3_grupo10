@@ -1,4 +1,4 @@
-const ProyectoCard = ({ proyecto, onEliminar }) => {
+const ProyectoCard = ({ proyecto, onEliminar, onVerDetalle}) => {
   const { id, titulo, categoria, estado } = proyecto;
 
   return (
@@ -7,12 +7,20 @@ const ProyectoCard = ({ proyecto, onEliminar }) => {
       <p><strong>Categoría:</strong> {categoria}</p>
       <p><strong>Estado:</strong> {estado}</p>
       
+      <div className="opcionesCard">
       <button 
-        className="btn-eliminar"
-        onClick={() => onEliminar(id)}
-      >
-        Eliminar
-      </button>
+          className="btn-detalle"
+          onClick={() => onVerDetalle(proyecto)}
+        >
+          Ver Detalle
+        </button>
+        <button 
+          className="btn-eliminar"
+          onClick={() => onEliminar(id)}
+        >
+          Eliminar
+        </button>
+      </div>
     </div>
   );
 };

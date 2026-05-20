@@ -1,19 +1,23 @@
 import { proyectoService } from "../services/proyectoService.js";
 import { useState } from "react";
 import ProyectoCard from "./ProyectoCard.jsx";
+import DetalleProyecto from "./DetalleProyecto.jsx";
 
 const ListaProyectos = () => {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
 
+  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+
   const [proyectoFormulario, setProyectoFormulario] = useState({
     titulo: "",
     categoria: "",
-    estado: "Activo"
+    estado: "Activo",
+    descripcion: ""
   });
 
   // Desestructuración en el manejo de los estados del formulario
-  const { titulo, categoria, estado } = proyectoFormulario;
+  const { titulo, categoria, estado, descripcion } = proyectoFormulario;
 
   const [busqueda, setBusqueda] = useState("");
 
@@ -39,7 +43,8 @@ const ListaProyectos = () => {
     setProyectoFormulario({
       titulo: "",
       categoria: "",
-      estado: "Activo"
+      estado: "Activo",
+      descripcion: ""
     });
   };
 
@@ -62,6 +67,10 @@ const ListaProyectos = () => {
     } else {
       setProyectos(proyectoService.obtenerProyectos());
     }
+  };
+
+  const manejarVerDetalle = (proyecto) => {
+    setProyectoSeleccionado(proyecto);
   };
 
   return (
@@ -101,6 +110,18 @@ const ListaProyectos = () => {
             onChange={manejarCambio}
             required
           />
+
+          <input
+            type="text"
+            name="descripcion"
+            className="input-form"
+            placeholder="Descripción detallada del proyecto..."
+            value={descripcion}
+            onChange={manejarCambio}
+            required
+            rows="3"
+            style={{ resize: 'vertical' }}
+          />
           
           <select
             name="estado"
@@ -119,6 +140,12 @@ const ListaProyectos = () => {
         </form>
       </div>
 
+
+
+      {proyectoSeleccionado && (
+        <DetalleProyecto proyecto={proyectoSeleccionado} />
+      )}
+
       <h2>Proyectos Actuales</h2>
       
       <div className="proyectos-grid">
@@ -130,6 +157,7 @@ const ListaProyectos = () => {
               key={proyecto.id}
               proyecto={proyecto}
               onEliminar={manejarEliminar}
+              onVerDetalle={manejarVerDetalle}
             />
           ))
         )}
