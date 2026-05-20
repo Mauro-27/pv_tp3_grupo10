@@ -1,7 +1,5 @@
 @import url('https://fonts.googleapis.com/css2?family=Inter:wght@300;400;600&display=swap');
 
-
-/*Definimos variables para guardar colores*/
 :root {
     --primary-color: #2563eb;
     --primary-hover: #1d4ed8;
@@ -26,11 +24,6 @@ body {
     line-height: 1.6;
 }
 
-
-
-
-
-/*Header*/
 header {
     background-color: var(--white);
     padding: 32px;
@@ -51,13 +44,6 @@ header h3 {
 }
 
 
-
-
-
-
-
-
-/*Nav con Flex*/
 nav {
     background-color: var(--white);
     position: sticky;
@@ -89,11 +75,6 @@ nav a:hover {
 }
 
 
-
-
-
-
-/*Contenedor Principal*/
 main {
     max-width: 1000px;
     margin: 32px auto;
@@ -104,7 +85,122 @@ main {
 }
 
 
-/*Footer */
+.novedades {
+    background: var(--white);
+    padding: 32px;
+    border-radius: 12px;
+    box-shadow: var(--shadow);
+}
+
+
+.buscador-container {
+    margin-bottom: 20px;
+}
+
+.input-buscador {
+    width: 100%;
+    padding: 10px;
+    margin-top: 10px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    font-family: inherit;
+}
+
+.formulario-container {
+    margin-bottom: 40px;
+}
+
+.formulario-proyectos {
+    display: flex;
+    gap: 15px;
+    flex-wrap: wrap;
+    margin-top: 15px;
+    align-items: center;
+}
+
+.input-form, .select-form {
+    padding: 8px;
+    border-radius: 4px;
+    border: 1px solid var(--border-color);
+    font-family: inherit;
+}
+
+.input-form[name="titulo"] {
+    flex: 1 1 200px;
+}
+
+.input-form[name="categoria"] {
+    flex: 1 1 150px;
+}
+
+.btn-guardar {
+    padding: 8px 16px;
+    background-color: var(--primary-color);
+    color: var(--white);
+    border: none;
+    border-radius: 8px;
+    cursor: pointer;
+    font-weight: bold;
+    font-family: inherit;
+    transition: background-color 0.3s ease;
+}
+
+.btn-guardar:hover {
+    background-color: var(--primary-hover);
+}
+
+.proyectos-grid {
+    display: flex;
+    flex-wrap: wrap;
+    gap: 24px;
+    justify-content: space-between;
+}
+
+.proyecto-card {
+    background: var(--white);
+    flex: 1 1 300px; 
+    padding: 24px;
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+    box-shadow: var(--shadow);
+    transition: transform 0.2s;
+}
+
+.proyecto-card:hover {
+    transform: translateY(-5px);
+}
+
+.proyecto-card h3 {
+    font-size: 18px;
+    color: var(--primary-color);
+    margin-bottom: 12px;
+    border-bottom: 1px solid var(--bg-light);
+    padding-bottom: 8px;
+}
+
+.proyecto-card p {
+    font-size: 15px;
+    color: var(--text-main);
+    margin-bottom: 6px;
+}
+
+.btn-eliminar {
+    margin-top: 15px;
+    padding: 6px 12px;
+    background-color: #dc2626;
+    color: var(--white);
+    border: none;
+    border-radius: 4px;
+    cursor: pointer;
+    font-family: inherit;
+    transition: background-color 0.3s ease;
+}
+
+.btn-eliminar:hover {
+    background-color: #b91c1c; 
+}
+
+
 footer {
     background-color: var(--text-main);
     color: var(--white);
@@ -138,57 +234,14 @@ footer a:hover {
 }
 
 
-/* Contenedor que agrupa todos los proyectos en formato grilla */
-.proyectos-grid {
-    display: grid;
-    grid-template-columns: repeat(auto-fill, minmax(300px, 1fr));
-    gap: 24px;
-    margin-top: 24px;
-}
 
-/* Diseño individual de cada proyecto */
-.proyecto-card {
-    background-color: var(--white);
-    padding: 24px;
-    border-radius: 12px;
-    border: 1px solid var(--border-color);
-    box-shadow: var(--shadow);
-    transition: transform 0.2s ease;
-}
-
-/* Efecto al pasar el mouse por encima */
-.proyecto-card:hover {
-    transform: translateY(-5px);
-    border-color: var(--primary-color);
-}
-
-/* Título del proyecto */
-.proyecto-card h3 {
-    color: var(--primary-color);
-    font-size: 20px;
-    margin-bottom: 16px;
-    border-bottom: 1px solid var(--bg-light);
-    padding-bottom: 8px;
-}
-
-/* Textos de Categoría y Estado */
-.proyecto-card p {
-    color: var(--text-muted);
-    font-size: 15px;
-    margin-bottom: 8px;
-}
-
-/* Resaltar las palabras Categoría y Estado */
-.proyecto-card strong {
-    color: var(--text-main);
-    font-weight: 600;
-}
 
 
 /* Adaptabilidad para móviles */
 @media (max-width: 600px) {
-    .estadisticas div {
-        flex: 1 1 100%; /* Único porcentaje mantenido para forzar el ancho completo en móviles */
+    
+    .proyecto-card {
+        flex: 1 1 100%; 
     }
     
     nav ul {
