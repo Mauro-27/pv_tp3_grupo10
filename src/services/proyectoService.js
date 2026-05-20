@@ -12,10 +12,10 @@ export const proyectoService = (() => {
         github:"https://github.com/Proyecto-Inicial/html-inicial"
       },
       equipo:[
-        {nombre:"Campos Mauro",rol:"Maestro de Teoria Titular",},
+        {nombre:"Mauro Campos",rol:"Maestro de Teoria Titular",},
         {nombre:"Lucas Barrientos",rol:"Ayudante de Practica"},
         {nombre:"Gabriel Chauque",rol:"Segunda Ayudante de Practica"},
-        {nombre:"Rocha Erika",rol:"Maestra de Practica Titular"}
+        {nombre:"Erika Rocha",rol:"Maestra de Practica Titular"}
       ]
     },
     {
@@ -30,9 +30,9 @@ export const proyectoService = (() => {
         github: "https://github.com/escuela/huerta-robotica"
       },
       equipo: [
-        { nombre: "Prof. Alberto Ruiz", rol: "Coordinador de Proyecto" },
-        { nombre: "Alexander", rol: "Desarrollador IoT y Hardware" },
-        { nombre: "Sofía Medina", rol: "Especialista en Botánica" }
+        { nombre: "Mauro Campos", rol: "Coordinador de Proyecto" },
+        { nombre: "Gabriel Chauque", rol: "Desarrollador IoT y Hardware" },
+        { nombre: "Erika Rocha", rol: "Especialista en Botánica" }
       ]
     },
     {
@@ -47,9 +47,9 @@ export const proyectoService = (() => {
         github: "https://github.com/escuela/mate-interactiva"
       },
       equipo: [
-        { nombre: "Valentina Gómez", rol: "Profesora Titular de Matemática" },
-        { nombre: "Marcos Toledo", rol: "Diseñador UX/UI" },
-        { nombre: "Julieta Paz", rol: "Programadora Frontend" }
+        { nombre: "Lucas Barrientos", rol: "Profesora Titular de Matemática" },
+        { nombre: "Mauro Campos", rol: "Diseñador UX/UI" },
+        { nombre: "Gabriel Chauque", rol: "Programadora Frontend" }
       ]
     },
     {
@@ -64,9 +64,9 @@ export const proyectoService = (() => {
         github: "https://github.com/escuela/lab-virtual"
       },
       equipo: [
-        { nombre: "Dra. Elena Costa", rol: "Coordinadora Científica" },
-        { nombre: "Martín López", rol: "Programador de Físicas" },
-        { nombre: "Lucía Fernández", rol: "Animadora 3D" }
+        { nombre: "Lucas Barrientos", rol: "Coordinadora Científica" },
+        { nombre: "Erika Rocha", rol: "Programador de Físicas" },
+        { nombre: "Gabriel Chauque", rol: "Animadora 3D" }
       ]
     },
     {
@@ -81,9 +81,9 @@ export const proyectoService = (() => {
         github: "https://github.com/escuela/biblioteca-digital"
       },
       equipo: [
-        { nombre: "Carla Rivas", rol: "Bibliotecaria Titular" },
-        { nombre: "Alexander", rol: "Administrador de Base de Datos" },
-        { nombre: "Tomás Herrera", rol: "Desarrollador Backend" }
+        { nombre: "Gabriel Chauque", rol: "Bibliotecaria Titular" },
+        { nombre: "Lucas Barrientos", rol: "Administrador de Base de Datos" },
+        { nombre: "Mauro Campos", rol: "Desarrollador Backend" }
       ]
     }
   ]
