@@ -15,7 +15,6 @@ export const proyectoService = (() => {
         {nombre:"Mauro Campos",rol:"Maestro de Teoria Titular",},
         {nombre:"Lucas Barrientos",rol:"Ayudante de Practica"},
         {nombre:"Gabriel Chauque",rol:"Segunda Ayudante de Practica"},
-        {nombre:"Erika Rocha",rol:"Maestra de Practica Titular"}
       ]
     },
     {
