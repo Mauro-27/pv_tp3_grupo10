@@ -6,26 +6,54 @@ import DetalleProyecto from "./DetalleProyecto.jsx";
 const ListaProyectos = () => {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
-
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
 
   const [proyectoFormulario, setProyectoFormulario] = useState({
     titulo: "",
     categoria: "",
     estado: "Activo",
-    descripcion: ""
+    descripcion: "",
+    recursos: { pdf: "", drive: "", github: "" },
+    equipo: [
+      { nombre: "", rol: "" },
+      { nombre: "", rol: "" }, 
+      { nombre: "", rol: "" } 
+    ]
   });
 
-  // Desestructuración en el manejo de los estados del formulario
-  const { titulo, categoria, estado, descripcion } = proyectoFormulario;
-
+  const { titulo, categoria, estado, descripcion, recursos, equipo } = proyectoFormulario;
   const [busqueda, setBusqueda] = useState("");
+
 
   const manejarCambio = (evento) => {
     const { name, value } = evento.target;
     setProyectoFormulario({
       ...proyectoFormulario,
       [name]: value
+    });
+  };
+
+
+  const manejarCambioRecursos = (evento) => {
+    const { name, value } = evento.target;
+    setProyectoFormulario({
+      ...proyectoFormulario,
+      recursos: {
+        ...proyectoFormulario.recursos,
+        [name]: value
+      }
+    });
+  };
+
+
+  const manejarCambioEquipo = (index, evento) => {
+    const { name, value } = evento.target;
+    const nuevoEquipo = [...proyectoFormulario.equipo];
+    nuevoEquipo[index] = { ...nuevoEquipo[index], [name]: value };
+    
+    setProyectoFormulario({
+      ...proyectoFormulario,
+      equipo: nuevoEquipo
     });
   };
 
@@ -44,7 +72,13 @@ const ListaProyectos = () => {
       titulo: "",
       categoria: "",
       estado: "Activo",
-      descripcion: ""
+      descripcion: "",
+      recursos: { pdf: "", drive: "", github: "" },
+      equipo: [
+        { nombre: "", rol: "" },
+        { nombre: "", rol: "" },
+        { nombre: "", rol: "" }
+      ]
     });
   };
 
@@ -62,6 +96,10 @@ const ListaProyectos = () => {
   const manejarEliminar = (id) => {
     proyectoService.eliminarProyecto(id);
     
+    if (proyectoSeleccionado && proyectoSeleccionado.id === id) {
+        setProyectoSeleccionado(null);
+    }
+
     if (busqueda !== "") {
       setProyectos(proyectoService.buscarProyecto(busqueda));
     } else {
@@ -75,7 +113,6 @@ const ListaProyectos = () => {
 
   return (
     <main>
-      
       <div className="novedades buscador-container">
         <h3>Buscador</h3>
         <input
@@ -91,59 +128,68 @@ const ListaProyectos = () => {
         <h3>Registrar Nuevo Proyecto</h3>
 
         <form className="formulario-proyectos" onSubmit={manejarEnvio}>
-          <input
-            type="text"
-            name="titulo"
-            className="input-form"
-            placeholder="Título del proyecto"
-            value={titulo}
-            onChange={manejarCambio}
-            required
-          />
           
-          <input
-            type="text"
-            name="categoria"
-            className="input-form"
-            placeholder="Categoría (ej: Robótica)"
-            value={categoria}
-            onChange={manejarCambio}
-            required
-          />
+          <div className="form-seccion-basica">
+              <input type="text" name="titulo" className="input-form" placeholder="Título del proyecto" value={titulo} onChange={manejarCambio} required />
+              <input type="text" name="categoria" className="input-form" placeholder="Categoría (ej: Robótica)" value={categoria} onChange={manejarCambio} required />
+              <select name="estado" className="select-form" value={estado} onChange={manejarCambio}>
+                <option value="Activo">Activo</option>
+                <option value="En Progreso">En Progreso</option>
+                <option value="Completado">Completado</option>
+              </select>
+          </div>
 
-          <input
-            type="text"
-            name="descripcion"
-            className="input-form"
-            placeholder="Descripción detallada del proyecto..."
-            value={descripcion}
-            onChange={manejarCambio}
-            required
-            rows="3"
-            style={{ resize: 'vertical' }}
-          />
+          <textarea name="descripcion" className="input-form textarea-descripcion" placeholder="Descripción detallada del proyecto..." value={descripcion} onChange={manejarCambio} required rows="3" />
           
-          <select
-            name="estado"
-            className="select-form"
-            value={estado}
-            onChange={manejarCambio}
-          >
-            <option value="Activo">Activo</option>
-            <option value="En Progreso">En Progreso</option>
-            <option value="Completado">Completado</option>
-          </select>
+          <div className="form-seccion-extra">
+            <h4>Recursos del Proyecto</h4>
+            <div className="inputs-fila">
+                <input type="text" name="pdf" className="input-form" placeholder="Enlace del PDF" value={recursos.pdf} onChange={manejarCambioRecursos} required />
+                <input type="text" name="drive" className="input-form" placeholder="Enlace de Drive" value={recursos.drive} onChange={manejarCambioRecursos} required />
+                <input type="text" name="github" className="input-form" placeholder="Enlace de GitHub" value={recursos.github} onChange={manejarCambioRecursos} required />
+            </div>
+          </div>
 
-          <button type="submit" className="btn-guardar">
-            Guardar Proyecto
+          <div className="form-seccion-extra">
+            <h4>Equipo de Trabajo (3 Integrantes obligatorios)</h4>
+            
+            {[0, 1, 2].map((index) => (
+              <div className="inputs-fila" key={index}>
+                <input 
+                  type="text" 
+                  name="nombre" 
+                  className="input-form" 
+                  placeholder={`Nombre del integrante ${index + 1}`} 
+                  value={equipo[index].nombre} 
+                  onChange={(evento) => manejarCambioEquipo(index, evento)} 
+                  required 
+                />
+                <input 
+                  type="text" 
+                  name="rol" 
+                  className="input-form" 
+                  placeholder={`Rol del integrante ${index + 1}`} 
+                  value={equipo[index].rol} 
+                  onChange={(evento) => manejarCambioEquipo(index, evento)} 
+                  required 
+                />
+              </div>
+            ))}
+          </div>
+
+          <button type="submit" className="btn-guardar btn-finalizar">
+            Guardar Proyecto Completo
           </button>
         </form>
       </div>
 
-
-
       {proyectoSeleccionado && (
-        <DetalleProyecto proyecto={proyectoSeleccionado} />
+        <div className="detalle-wrapper">
+          <DetalleProyecto proyecto={proyectoSeleccionado} />
+          <button onClick={() => setProyectoSeleccionado(null)} className="btn-eliminar btn-cerrar-detalle">
+              Cerrar Detalle
+          </button>
+        </div>
       )}
 
       <h2>Proyectos Actuales</h2>

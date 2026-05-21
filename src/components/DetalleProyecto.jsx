@@ -5,7 +5,7 @@ const DetalleProyecto = ({ proyecto }) =>{
 
     const {titulo, categoria, estado, descripcion, recursos, equipo} = proyecto;
 
-    const parrafos = descripcion ? descripcion.split('\n') : ["Descripcion no disponible."];
+    const parrafos = descripcion.split('\n');
 
     return(
         <div className="novedades detalle-container">
@@ -26,18 +26,18 @@ const DetalleProyecto = ({ proyecto }) =>{
             <div className="detalle-seccion">
                 <h3 className="detalle-subtitulo">Recursos</h3>
                 <ul className="detalle-lista">
-                    <li><strong>PDF:</strong> {recursos?.pdf || 'No disponible'}</li>
-                    <li><strong>Drive:</strong> {recursos?.drive || 'No disponible'}</li>
-                    <li><strong>GitHub:</strong> {recursos?.github || 'No disponible'}</li>
+                    <li><strong>PDF:</strong> {recursos.pdf}</li>
+                    <li><strong>Drive:</strong> {recursos.drive}</li>
+                    <li><strong>GitHub:</strong> {recursos.github}</li>
                 </ul>
             </div>
 
             <div>
                 <h3 className="detalle-subtitulo">Equipo de Trabajo</h3>
                 <ul className="detalle-lista">
-                    {equipo ? equipo.map((miembro, index) => (
+                    {equipo.map((miembro, index) => (
                     <li key={index}><strong>{miembro.nombre}</strong> - {miembro.rol}</li>
-                    )) : <li>Equipo no asignado aún</li>}
+                    ))} 
                 </ul>
             </div>
         </div>

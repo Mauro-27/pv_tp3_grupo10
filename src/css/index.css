@@ -43,7 +43,6 @@ header h3 {
     font-size: 16px;
 }
 
-
 nav {
     background-color: var(--white);
     position: sticky;
@@ -74,7 +73,6 @@ nav a:hover {
     color: var(--white);
 }
 
-
 main {
     max-width: 1000px;
     margin: 32px auto;
@@ -84,14 +82,12 @@ main {
     gap: 32px;
 }
 
-
 .novedades {
     background: var(--white);
     padding: 32px;
     border-radius: 12px;
     box-shadow: var(--shadow);
 }
-
 
 .buscador-container {
     margin-bottom: 20px;
@@ -112,10 +108,8 @@ main {
 
 .formulario-proyectos {
     display: flex;
-    gap: 15px;
-    flex-wrap: wrap;
+    flex-direction: column;
     margin-top: 15px;
-    align-items: center;
 }
 
 .input-form, .select-form {
@@ -125,16 +119,56 @@ main {
     font-family: inherit;
 }
 
-.input-form[name="titulo"] {
+
+.form-seccion-basica {
+    display: flex;
+    gap: 15px;
+    width: 100%;
+    margin-bottom: 15px;
+    flex-wrap: wrap;
+}
+
+.form-seccion-basica input {
     flex: 1 1 200px;
 }
 
-.input-form[name="categoria"] {
+.form-seccion-basica select {
     flex: 1 1 150px;
 }
 
+.textarea-descripcion {
+    width: 100%;
+    resize: vertical;
+    margin-bottom: 20px;
+}
+
+.form-seccion-extra {
+    width: 100%;
+    background-color: var(--bg-light);
+    padding: 15px;
+    border-radius: 8px;
+    border: 1px solid var(--border-color);
+    margin-bottom: 20px;
+}
+
+.form-seccion-extra h4 {
+    margin-bottom: 15px;
+    color: var(--primary-color);
+    font-size: 15px;
+}
+
+.inputs-fila {
+    display: flex;
+    gap: 10px;
+    margin-bottom: 10px;
+}
+
+.inputs-fila input {
+    flex: 1;
+}
+
 .btn-guardar {
-    padding: 8px 16px;
+    padding: 12px 16px;
     background-color: var(--primary-color);
     color: var(--white);
     border: none;
@@ -143,11 +177,14 @@ main {
     font-weight: bold;
     font-family: inherit;
     transition: background-color 0.3s ease;
+    width: 100%;
+    font-size: 16px;
 }
 
 .btn-guardar:hover {
     background-color: var(--primary-hover);
 }
+
 
 .proyectos-grid {
     display: flex;
@@ -164,6 +201,8 @@ main {
     border: 1px solid var(--border-color);
     box-shadow: var(--shadow);
     transition: transform 0.2s;
+    display: flex;
+    flex-direction: column;
 }
 
 .proyecto-card:hover {
@@ -184,34 +223,6 @@ main {
     margin-bottom: 6px;
 }
 
-.btn-eliminar {
-    /*margin-top: 15px;
-    padding: 6px 12px;
-    background-color: #dc2626;
-    color: var(--white);
-    border: none;
-    border-radius: 4px;
-    cursor: pointer;
-    font-family: inherit;
-    transition: background-color 0.3s ease;*/
-
-    flex: 1;
-    background-color: #ef4444;
-    color: white;
-    border: none;
-    padding: 10px 12px;
-    border-radius: 8px;
-    font-weight: 600;
-    cursor: pointer;
-    transition: background-color 0.3s ease;
-}
-
-.btn-eliminar:hover {
-    /*background-color: #b91c1c; */
-    background-color: #dc2626;
-}
-
-/* Contenedor de los botones en la Card */
 .opcionesCard {
     display: flex;
     gap: 12px;
@@ -220,7 +231,6 @@ main {
     width: 100%;
 }
 
-/* El boton de Ver Detalle */
 .btn-detalle {
     flex: 1;
     background-color: var(--bg-light);
@@ -240,8 +250,33 @@ main {
 
 .btn-eliminar {
     flex: 1;
+    background-color: #ef4444;
+    color: white;
+    border: none;
+    padding: 10px 12px;
+    border-radius: 8px;
+    font-weight: 600;
+    cursor: pointer;
+    transition: background-color 0.3s ease;
 }
 
+.btn-eliminar:hover {
+    background-color: #dc2626;
+}
+
+
+.detalle-wrapper {
+    position: relative;
+    margin-bottom: 30px;
+}
+
+.btn-cerrar-detalle {
+    position: absolute;
+    top: 20px;
+    right: 20px;
+    width: auto;
+    padding: 6px 12px;
+}
 
 footer {
     background-color: var(--text-main);
@@ -275,13 +310,8 @@ footer a:hover {
     color: var(--white);
 }
 
-
-
-
-
-/* Adaptabilidad para móviles */
+/* ADAPTABILIDAD (MÓVILES) */
 @media (max-width: 600px) {
-    
     .proyecto-card {
         flex: 1 1 100%; 
     }
@@ -289,5 +319,9 @@ footer a:hover {
     nav ul {
         flex-direction: column;
         align-items: center;
+    }
+
+    .inputs-fila {
+        flex-direction: column;
     }
 }
