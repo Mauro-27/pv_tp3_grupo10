@@ -1,12 +1,16 @@
 import { proyectoService } from "../services/proyectoService.js";
-import { useState } from "react";
+import { useState, useEffect } from "react";
 import ProyectoCard from "./ProyectoCard.jsx";
 import DetalleProyecto from "./DetalleProyecto.jsx";
+import RegistroActividad from "./RegistroActividad.jsx";
+
 
 const ListaProyectos = () => {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
+  const [busqueda, setBusqueda] = useState("");
+  const [ultimaModificacion, setUltimaModificacion] = useState("");
 
   const [proyectoFormulario, setProyectoFormulario] = useState({
     titulo: "",
@@ -22,7 +26,17 @@ const ListaProyectos = () => {
   });
 
   const { titulo, categoria, estado, descripcion, recursos, equipo } = proyectoFormulario;
-  const [busqueda, setBusqueda] = useState("");
+
+
+  useEffect(() => {
+    const ahora = new Date();
+    const cambiarFecha = ahora.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' });
+    const cambiarHora = ahora.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
+    
+    const horaFormateada = `${cambiarFecha} a las ${cambiarHora} hs.`;
+    
+    setUltimaModificacion(horaFormateada);
+  }, [proyectos]);
 
 
   const manejarCambio = (evento) => {
@@ -85,12 +99,6 @@ const ListaProyectos = () => {
   const manejarBusqueda = (evento) => {
     const texto = evento.target.value;
     setBusqueda(texto);
-
-    if (texto === "") {
-      setProyectos(proyectoService.obtenerProyectos());
-    } else {
-      setProyectos(proyectoService.buscarProyecto(texto));
-    }
   };
 
   const manejarEliminar = (id) => {
@@ -99,17 +107,16 @@ const ListaProyectos = () => {
     if (proyectoSeleccionado && proyectoSeleccionado.id === id) {
         setProyectoSeleccionado(null);
     }
-
-    if (busqueda !== "") {
-      setProyectos(proyectoService.buscarProyecto(busqueda));
-    } else {
-      setProyectos(proyectoService.obtenerProyectos());
-    }
+    setProyectos(proyectoService.obtenerProyectos());
   };
 
   const manejarVerDetalle = (proyecto) => {
     setProyectoSeleccionado(proyecto);
   };
+
+  const proyectosFiltrados = proyectos.filter((proyecto) =>
+    proyecto.titulo.toLowerCase().includes(busqueda.toLowerCase())
+  );
 
   return (
     <main>
@@ -195,10 +202,10 @@ const ListaProyectos = () => {
       <h2>Proyectos Actuales</h2>
       
       <div className="proyectos-grid">
-        {proyectos.length === 0 ? (
+        {proyectosFiltrados.length === 0 ? (
           <p>No se encontraron proyectos.</p>
         ) : (
-          proyectos.map((proyecto) => (
+          proyectosFiltrados.map((proyecto) => (
             <ProyectoCard
               key={proyecto.id}
               proyecto={proyecto}
@@ -208,6 +215,8 @@ const ListaProyectos = () => {
           ))
         )}
       </div>
+
+      <RegistroActividad fechaUltimaModificacion={ultimaModificacion} />
 
     </main>
   );
