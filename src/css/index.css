@@ -310,6 +310,12 @@ footer a:hover {
     color: var(--white);
 }
 
+.registro-actividad-container {
+    margin-top: 20px;
+    border-top: 1px solid var(--border-color);
+    padding-top: 15px;
+}
+
 /* ADAPTABILIDAD (MÓVILES) */
 @media (max-width: 600px) {
     .proyecto-card {
