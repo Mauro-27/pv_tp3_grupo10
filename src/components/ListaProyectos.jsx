@@ -1,5 +1,5 @@
 import { proyectoService } from "../services/proyectoService.js";
-import { useState, useEffect } from "react";
+import { useState, useEffect, useRef } from "react";
 import ProyectoCard from "./ProyectoCard.jsx";
 import DetalleProyecto from "./DetalleProyecto.jsx";
 import RegistroActividad from "./RegistroActividad.jsx";
@@ -11,6 +11,9 @@ const ListaProyectos = () => {
   const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [ultimaModificacion, setUltimaModificacion] = useState("");
+
+  // bandera para no ejecutar en el primer render
+  const primerRender = useRef(true);
 
   const [proyectoFormulario, setProyectoFormulario] = useState({
     titulo: "",
@@ -29,6 +32,12 @@ const ListaProyectos = () => {
 
 
   useEffect(() => {
+    // cortamos aca si es la primera vez que carga la pagina
+    if (primerRender.current) {
+      primerRender.current = false;
+      return;
+    }
+
     const ahora = new Date();
     const cambiarFecha = ahora.toLocaleDateString('es-AR', { day: '2-digit', month: '2-digit', year: 'numeric' });
     const cambiarHora = ahora.toLocaleTimeString('es-AR', { hour: '2-digit', minute: '2-digit', hour12: false });
