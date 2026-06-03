@@ -1,5 +1,6 @@
 import { proyectoService } from "../services/proyectoService.js";
 import { useState } from "react";
+import ProyectoCard from "./ProyectoCard";
 
 const ListaProyectos = () => {
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
@@ -10,11 +11,17 @@ const ListaProyectos = () => {
 
       <div className="proyectos-grid">
         {proyectos.map((proyecto) => (
-          <div key={proyecto.id} className="proyecto-card">
-            <h3>{proyecto.titulo}</h3>
-            <p><strong>Categoría:</strong> {proyecto.categoria}</p>
-            <p><strong>Estado:</strong> {proyecto.estado}</p>
-          </div>
+          <ProyectoCard
+  key={proyecto.id}
+  proyecto={proyecto}
+  onVerDetalle={(proyecto) => {
+    console.log(proyecto);
+  }}
+  onEliminar={(id) => {
+    proyectoService.eliminarProyecto(id);
+    setProyectos(proyectoService.obtenerProyectos());
+  }}
+/>
         ))}
       </div>
     </main>

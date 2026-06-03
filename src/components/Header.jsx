@@ -1,9 +1,10 @@
-function Header() {
-    return(
-        <header>
-            <h1>Sistema de Gestion de Proyectos</h1>
-            <p>Trabajo Practico N° 3 - pARTE 4</p>
-        </header>
-    );
-}
+const Header = () => {
+  return (
+    <header id="titulo">
+      <h1>Gestión de Proyectos Educativos</h1>
+      <h3>Detalles del proyecto</h3>
+    </header>
+  );
+};
+
 export default Header;
