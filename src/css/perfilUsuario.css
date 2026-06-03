@@ -1,0 +1,12 @@
+.perfil-contenedor {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.perfil-paper {
+  padding: 24px;
+}
+
+.perfil-divisor {
+  margin-bottom: 16px !important;
+}

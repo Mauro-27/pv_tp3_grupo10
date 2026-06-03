@@ -1,7 +1,8 @@
 import { useState } from "react";
+import { TextField, MenuItem, Button, Typography, Paper } from "@mui/material";
+import '../css/formulario.css'; 
 
 const FormularioProyecto = ({ onAgregarProyecto }) => {
-  
   const [proyectoFormulario, setProyectoFormulario] = useState({
     titulo: "",
     categoria: "",
@@ -17,7 +18,6 @@ const FormularioProyecto = ({ onAgregarProyecto }) => {
 
   const { titulo, categoria, estado, descripcion, recursos, equipo } = proyectoFormulario;
 
-  // mudamos todas las funciones de manejarCambio
   const manejarCambio = (evento) => {
     const { name, value } = evento.target;
     setProyectoFormulario({ ...proyectoFormulario, [name]: value });
@@ -41,9 +41,7 @@ const FormularioProyecto = ({ onAgregarProyecto }) => {
   const manejarEnvio = (evento) => {
     evento.preventDefault();
     const nuevoProyecto = { id: Date.now(), ...proyectoFormulario };
-
     onAgregarProyecto(nuevoProyecto);
-
     setProyectoFormulario({
       titulo: "", categoria: "", estado: "Activo", descripcion: "",
       recursos: { pdf: "", drive: "", github: "" },
@@ -52,60 +50,75 @@ const FormularioProyecto = ({ onAgregarProyecto }) => {
   };
 
   return (
-    <form className="formulario-proyectos" onSubmit={manejarEnvio}>
-          
-          <div className="form-seccion-basica">
-              <input type="text" name="titulo" className="input-form" placeholder="Título del proyecto" value={titulo} onChange={manejarCambio} required />
-              <input type="text" name="categoria" className="input-form" placeholder="Categoría (ej: Robótica)" value={categoria} onChange={manejarCambio} required />
-              <select name="estado" className="select-form" value={estado} onChange={manejarCambio}>
-                <option value="Activo">Activo</option>
-                <option value="En Progreso">En Progreso</option>
-                <option value="Completado">Completado</option>
-              </select>
-          </div>
+    <Paper elevation={3} className="paper-formulario">
+      <form onSubmit={manejarEnvio} className="formulario-layout">
+        
+        <Typography variant="h6" color="primary" className="titulo-formulario">
+          Crear Nuevo Proyecto
+        </Typography>
 
-          <textarea name="descripcion" className="input-form textarea-descripcion" placeholder="Descripción detallada del proyecto..." value={descripcion} onChange={manejarCambio} required rows="3" />
-          
-          <div className="form-seccion-extra">
-            <h4>Recursos del Proyecto</h4>
-            <div className="inputs-fila">
-                <input type="text" name="pdf" className="input-form" placeholder="Enlace del PDF" value={recursos.pdf} onChange={manejarCambioRecursos} required />
-                <input type="text" name="drive" className="input-form" placeholder="Enlace de Drive" value={recursos.drive} onChange={manejarCambioRecursos} required />
-                <input type="text" name="github" className="input-form" placeholder="Enlace de GitHub" value={recursos.github} onChange={manejarCambioRecursos} required />
+        {/* Sección Básica */}
+        <div className="fila-tres-columnas">
+          <TextField label="Título del proyecto" name="titulo" value={titulo} onChange={manejarCambio} required />
+          <TextField label="Categoría (ej: Robótica)" name="categoria" value={categoria} onChange={manejarCambio} required />
+          <TextField select label="Estado" name="estado" value={estado} onChange={manejarCambio}>
+            <MenuItem value="Activo">Activo</MenuItem>
+            <MenuItem value="En Progreso">En Progreso</MenuItem>
+            <MenuItem value="Completado">Completado</MenuItem>
+          </TextField>
+        </div>
+
+        {/* Descripción */}
+        <div className="fila-una-columna">
+          <TextField multiline rows={3} label="Descripción detallada del proyecto" name="descripcion" value={descripcion} onChange={manejarCambio} required />
+        </div>
+
+        {/* Recursos */}
+        <Typography variant="subtitle1" className="titulo-seccion">
+          Recursos del Proyecto
+        </Typography>
+        <div className="fila-tres-columnas">
+          <TextField size="small" label="Enlace del PDF" name="pdf" value={recursos.pdf} onChange={manejarCambioRecursos} required />
+          <TextField size="small" label="Enlace de Drive" name="drive" value={recursos.drive} onChange={manejarCambioRecursos} required />
+          <TextField size="small" label="Enlace de GitHub" name="github" value={recursos.github} onChange={manejarCambioRecursos} required />
+        </div>
+
+        {/* Equipo */}
+        <Typography variant="subtitle1" className="titulo-seccion">
+          Equipo de Trabajo (3 Integrantes obligatorios)
+        </Typography>
+        <div>
+          {[0, 1, 2].map((index) => (
+            <div key={index} className="fila-dos-columnas">
+              <TextField
+                size="small"
+                label={`Nombre del integrante ${index + 1}`}
+                name="nombre"
+                value={equipo[index].nombre}
+                onChange={(evento) => manejarCambioEquipo(index, evento)}
+                required
+              />
+              <TextField
+                size="small"
+                label={`Rol del integrante ${index + 1}`}
+                name="rol"
+                value={equipo[index].rol}
+                onChange={(evento) => manejarCambioEquipo(index, evento)}
+                required
+              />
             </div>
-          </div>
+          ))}
+        </div>
 
-          <div className="form-seccion-extra">
-            <h4>Equipo de Trabajo (3 Integrantes obligatorios)</h4>
-            
-            {[0, 1, 2].map((index) => (
-              <div className="inputs-fila" key={index}>
-                <input 
-                  type="text" 
-                  name="nombre" 
-                  className="input-form" 
-                  placeholder={`Nombre del integrante ${index + 1}`} 
-                  value={equipo[index].nombre} 
-                  onChange={(evento) => manejarCambioEquipo(index, evento)} 
-                  required 
-                />
-                <input 
-                  type="text" 
-                  name="rol" 
-                  className="input-form" 
-                  placeholder={`Rol del integrante ${index + 1}`} 
-                  value={equipo[index].rol} 
-                  onChange={(evento) => manejarCambioEquipo(index, evento)} 
-                  required 
-                />
-              </div>
-            ))}
-          </div>
-
-          <button type="submit" className="btn-guardar btn-finalizar">
+        {/* Botón Guardar */}
+        <div className="contenedor-boton">
+          <Button type="submit" variant="contained" color="success" size="large">
             Guardar Proyecto Completo
-          </button>
-        </form>
+          </Button>
+        </div>
+
+      </form>
+    </Paper>
   );
 };
 

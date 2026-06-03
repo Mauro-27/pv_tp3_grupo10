@@ -1,13 +1,13 @@
 import React from 'react';
+import { Alert } from '@mui/material';
 
 const RegistroActividad = ({ fechaUltimaModificacion }) => {
-  // si no hay fecha todavia no se renderiza nada
   if (!fechaUltimaModificacion) return null;
 
   return (
-    <div className="novedades registro-actividad-container">
-      <p>Última actualización de la lista: {fechaUltimaModificacion}</p>
-    </div>
+    <Alert severity="info" sx={{ mt: 2, mb: 2 }}>
+      Última actualización de la lista: {fechaUltimaModificacion}
+    </Alert>
   );
 };
 

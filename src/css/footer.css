@@ -1,0 +1,54 @@
+.footer-contenedor {
+  background-color: #f5f5f5; 
+  padding: 24px;
+  margin-top: auto;
+  border-top: 1px solid #e0e0e0;
+}
+
+.footer-contenido {
+  display: flex;
+  justify-content: space-between;
+  align-items: center;
+  gap: 16px;
+  max-width: 1200px;
+  margin: 0 auto;
+}
+
+.footer-seccion-contacto {
+  display: flex;
+  flex-direction: column;
+}
+
+.footer-titulo {
+  font-weight: bold !important;
+  color: #1e293b;
+  margin-bottom: 8px !important;
+}
+
+.footer-enlaces {
+  display: flex;
+  gap: 24px;
+  flex-wrap: wrap;
+}
+
+.footer-enlace-item {
+  color: #64748b !important; 
+  text-decoration: none;
+}
+
+.footer-derechos {
+  text-align: right;
+  color: #64748b;
+}
+
+@media (max-width: 600px) {
+  .footer-contenido {
+    flex-direction: column;
+    align-items: flex-start;
+    gap: 24px;
+  }
+  
+  .footer-derechos {
+    text-align: left;
+  }
+}

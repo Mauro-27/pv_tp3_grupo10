@@ -1,0 +1,18 @@
+.lista-contenedor-principal {
+  margin-top: 32px;
+  margin-bottom: 32px;
+}
+
+.lista-seccion-buscador {
+  margin-bottom: 32px;
+}
+
+.lista-seccion-formulario {
+  margin-bottom: 40px;
+}
+
+.lista-titulo-separador {
+  border-bottom: 2px solid #1976d2 !important; 
+  padding-bottom: 8px !important;
+  margin-bottom: 24px !important;
+}
