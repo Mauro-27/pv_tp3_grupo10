@@ -1,7 +1,14 @@
+import { useParams, useNavigate } from 'react-router-dom';
+import { proyectoService } from '../services/proyectoService.js';
 import '../css/detalleProyecto.css';
 
-const DetalleProyecto = ({ proyecto }) =>{
-    if(!proyecto) return null;
+const DetalleProyecto = () => {
+    // capturamos el id de la url y buscamos en el service
+    const { id } = useParams();
+    const navigate = useNavigate();
+    const proyecto = proyectoService.obtenerProyectoPorId(id);
+
+    if(!proyecto) return <h2 style={{ textAlign: 'center', marginTop: '50px' }}>proyecto no encontrado x_x</h2>;
 
     const {titulo, categoria, estado, descripcion, recursos, equipo} = proyecto;
 
@@ -40,6 +47,11 @@ const DetalleProyecto = ({ proyecto }) =>{
                     ))} 
                 </ul>
             </div>
+
+            {/* metemos el boton de volver aca adentro ya que ahora es una pagina aparte */}
+            <button onClick={() => navigate('/proyectos')} className="btn-eliminar btn-cerrar-detalle" style={{ marginTop: '20px' }}>
+                Volver a Proyectos
+            </button>
         </div>
     );
 };

@@ -105,10 +105,16 @@ export const proyectoService = (() => {
     );
   };
 
+  // agregamos esto para que el router pueda buscar el proyecto por id
+  const obtenerProyectoPorId = (id) => {
+    return proyectos.find((proyecto) => proyecto.id === parseInt(id));
+  };
+
   return {
     obtenerProyectos,
     agregarProyecto,
     eliminarProyecto,
-    buscarProyecto
+    buscarProyecto,
+    obtenerProyectoPorId
   };
 })();

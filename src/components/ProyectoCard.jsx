@@ -1,5 +1,8 @@
-const ProyectoCard = ({ proyecto, onEliminar, onVerDetalle}) => {
+import { useNavigate } from 'react-router-dom';
+
+const ProyectoCard = ({ proyecto, onEliminar }) => {
   const { id, titulo, categoria, estado } = proyecto;
+  const navigate = useNavigate();
 
   return (
     <div className="proyecto-card">
@@ -10,7 +13,7 @@ const ProyectoCard = ({ proyecto, onEliminar, onVerDetalle}) => {
       <div className="opcionesCard">
       <button 
           className="btn-detalle"
-          onClick={() => onVerDetalle(proyecto)}
+          onClick={() => navigate(`/proyectos/${id}`)}
         >
           Ver Detalle
         </button>

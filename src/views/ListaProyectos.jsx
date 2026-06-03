@@ -1,15 +1,13 @@
 import { proyectoService } from "../services/proyectoService.js";
 import { useState, useEffect, useRef } from "react";
-import ProyectoCard from "./ProyectoCard.jsx";
-import DetalleProyecto from "./DetalleProyecto.jsx";
-import RegistroActividad from "./RegistroActividad.jsx";
-import FormularioProyecto from "./FormularioProyecto.jsx";
+import ProyectoCard from "../components/ProyectoCard.jsx";
+import RegistroActividad from "../components/RegistroActividad.jsx";
+import FormularioProyecto from "../components/FormularioProyecto.jsx";
 
 
 const ListaProyectos = () => {
 
   const [proyectos, setProyectos] = useState(proyectoService.obtenerProyectos());
-  const [proyectoSeleccionado, setProyectoSeleccionado] = useState(null);
   const [busqueda, setBusqueda] = useState("");
   const [ultimaModificacion, setUltimaModificacion] = useState("");
 
@@ -45,14 +43,7 @@ const ListaProyectos = () => {
   const manejarEliminar = (id) => {
     proyectoService.eliminarProyecto(id);
     
-    if (proyectoSeleccionado && proyectoSeleccionado.id === id) {
-        setProyectoSeleccionado(null);
-    }
     setProyectos(proyectoService.obtenerProyectos());
-  };
-
-  const manejarVerDetalle = (proyecto) => {
-    setProyectoSeleccionado(proyecto);
   };
 
   const proyectosFiltrados = proyectos.filter((proyecto) =>
@@ -77,15 +68,6 @@ const ListaProyectos = () => {
         <FormularioProyecto onAgregarProyecto={manejarAgregarProyecto} />
       </div>
 
-      {proyectoSeleccionado && (
-        <div className="detalle-wrapper">
-          <DetalleProyecto proyecto={proyectoSeleccionado} />
-          <button onClick={() => setProyectoSeleccionado(null)} className="btn-eliminar btn-cerrar-detalle">
-              Cerrar Detalle
-          </button>
-        </div>
-      )}
-
       <h2>Proyectos Actuales</h2>
       
       <div className="proyectos-grid">
@@ -97,7 +79,6 @@ const ListaProyectos = () => {
               key={proyecto.id}
               proyecto={proyecto}
               onEliminar={manejarEliminar}
-              onVerDetalle={manejarVerDetalle}
             />
           ))
         )}
