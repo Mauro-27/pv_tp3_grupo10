@@ -1,14 +1,31 @@
 import { NavLink } from 'react-router-dom';
+import { Paper } from '@mui/material';
+import '../css/nav.css';
 
 const Nav = () => {
   return (
-    <nav>
-      <ul>
-        <li><NavLink to="/dashboard">Inicio</NavLink></li>
-        <li><NavLink to="/proyectos">Proyectos</NavLink></li>
-        <li><NavLink to="/perfil">Perfil</NavLink></li>
-      </ul>
-    </nav>
+    <Paper elevation={0} className="nav-contenedor">
+      <nav>
+        <ul className="nav-lista">
+          {[
+            { text: 'Inicio', to: '/dashboard' },
+            { text: 'Proyectos', to: '/proyectos' },
+            { text: 'Perfil', to: '/perfil' }
+          ].map((item) => (
+            <li key={item.text} className="nav-item-lista">
+              <NavLink
+                to={item.to}
+                className={({ isActive }) => 
+                  isActive ? "nav-boton nav-boton-activo" : "nav-boton"
+                }
+              >
+                {item.text}
+              </NavLink>
+            </li>
+          ))}
+        </ul>
+      </nav>
+    </Paper>
   );
 };
 

@@ -1,30 +1,46 @@
 import { useNavigate } from 'react-router-dom';
+import { Card, CardContent, CardActions, Typography, Button } from '@mui/material';
+import '../css/proyectoCard.css';
 
 const ProyectoCard = ({ proyecto, onEliminar }) => {
   const { id, titulo, categoria, estado } = proyecto;
   const navigate = useNavigate();
 
   return (
-    <div className="proyecto-card">
-      <h3>{titulo}</h3>
-      <p><strong>Categoría:</strong> {categoria}</p>
-      <p><strong>Estado:</strong> {estado}</p>
+    <Card className="tarjeta-proyecto" elevation={3}>
       
-      <div className="opcionesCard">
-      <button 
-          className="btn-detalle"
+      <CardContent className="tarjeta-contenido-principal">
+        <Typography variant="h5" component="div" gutterBottom>
+          {titulo}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          <strong>Categoría:</strong> {categoria}
+        </Typography>
+        <Typography variant="body2" color="text.secondary">
+          <strong>Estado:</strong> {estado}
+        </Typography>
+      </CardContent>
+      
+      <CardActions className="tarjeta-acciones">
+        <Button 
+          size="small" 
+          variant="contained" 
+          color="primary" 
           onClick={() => navigate(`/proyectos/${id}`)}
         >
           Ver Detalle
-        </button>
-        <button 
-          className="btn-eliminar"
+        </Button>
+        <Button 
+          size="small" 
+          variant="outlined" 
+          color="error" 
           onClick={() => onEliminar(id)}
         >
           Eliminar
-        </button>
-      </div>
-    </div>
+        </Button>
+      </CardActions>
+      
+    </Card>
   );
 };
 
