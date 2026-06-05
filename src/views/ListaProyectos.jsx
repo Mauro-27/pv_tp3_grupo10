@@ -77,14 +77,14 @@ const ListaProyectos = () => {
       
       <Grid container spacing={3}>
         {proyectosFiltrados.length === 0 ? (
-          <Grid item xs={12}>
+          <Grid xs={12}>
             <Typography variant="body1" color="text.secondary">
               No se encontraron proyectos.
             </Typography>
           </Grid>
         ) : (
           proyectosFiltrados.map((proyecto) => (
-            <Grid item xs={12} sm={6} md={4} key={proyecto.id}>
+            <Grid xs={12} sm={6} md={4} key={proyecto.id}>
               <ProyectoCard
                 proyecto={proyecto}
                 onEliminar={manejarEliminar}

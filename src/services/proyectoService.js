@@ -1,10 +1,11 @@
 export const proyectoService = (() => {
-  let proyectos = [
+  let proyectosPorDefecto = [
     {
       id:1,
       titulo:"Curso Inicial de HTML",
       categoria: "Programacion",
       estado:"Activo",
+      disponibilidad: true,
       descripcion:"En este proyecto se busca que los estudiantes aprendan conceptos basicos de HTML5",
       recursos:{
         pdf: "Apuntes_Basicos_de_HTML5.pdf",
@@ -22,6 +23,7 @@ export const proyectoService = (() => {
       titulo: "Huerta Escolar Automatizada",
       categoria: "Robótica",
       estado: "Activo",
+      disponibilidad: true,
       descripcion: "Desarrollo de un sistema de riego y monitoreo automático para la huerta de la escuela usando placas Arduino y sensores de humedad.\nEl objetivo es promover el cuidado del medio ambiente integrando la tecnología en el proceso.",
       recursos: {
         pdf: "Manual_Sensores_Arduino.pdf",
@@ -39,6 +41,7 @@ export const proyectoService = (() => {
       titulo: "Matemática Interactiva",
       categoria: "Matemática",
       estado: "Activo",
+      disponibilidad: true,
       descripcion: "Creación de una plataforma web con minijuegos y ejercicios visuales para enseñar álgebra y teoría de conjuntos.\nSe busca que los alumnos de secundaria practiquen los conceptos de forma lúdica e intuitiva.",
       recursos: {
         pdf: "Ejercicios_Algebra_Interactiva.pdf",
@@ -56,6 +59,7 @@ export const proyectoService = (() => {
       titulo: "Laboratorio Virtual de Ciencias",
       categoria: "Ciencias",
       estado: "Activo",
+       disponibilidad: true,
       descripcion: "Simulador interactivo para realizar experimentos de química y física de forma segura desde la computadora.\nPermite mezclar sustancias virtuales y visualizar las reacciones simuladas en tiempo real sin riesgos físicos.",
       recursos: {
         pdf: "Guia_Experimentos_Quimica.pdf",
@@ -73,6 +77,7 @@ export const proyectoService = (() => {
       titulo: "Biblioteca Digital para la Escuela",
       categoria: "Educación",
       estado: "Activo",
+      disponibilidad: true,
       descripcion: "Sistema web para la gestión y consulta de libros digitales (PDF y ePub) dirigido a los alumnos de la institución.\nIncluye un buscador integrado avanzado por título, autor y categoría con sistema de reservas.",
       recursos: {
         pdf: "Manual_Usuario_Biblioteca.pdf",
@@ -87,25 +92,39 @@ export const proyectoService = (() => {
     }
   ]
 
+  const datosGuardados = localStorage.getItem("mis_proyectos");
+  let proyectos = datosGuardados ? JSON.parse(datosGuardados) : proyectosPorDefecto;
+  const guardarEnStorage = () => {
+    localStorage.setItem("mis_proyectos", JSON.stringify(proyectos));
+  };
+
   const obtenerProyectos = () => {
-    return [...proyectos];
+    return proyectos.filter((proyecto) => proyecto.disponibilidad === true);
   };
 
   const agregarProyecto = (nuevoProyecto) => {
-    proyectos.push(nuevoProyecto);
+    const nuevoId = proyectos.length > 0 ? Math.max(...proyectos.map(p => p.id)) + 1 : 1;
+    proyectos.push({ ...nuevoProyecto, disponibilidad: true });
+    guardarEnStorage();
   };
 
   const eliminarProyecto = (id) => {
-    proyectos = proyectos.filter((proyecto) => proyecto.id !== id);
+    proyectos = proyectos.map((proyecto) => {
+      if (proyecto.id === id) {
+        return { ...proyecto, disponibilidad: false };
+      }
+      return proyecto;
+    });
+    guardarEnStorage();
   };
 
   const buscarProyecto = (texto) => {
-    return proyectos.filter((proyecto) =>
+    return proyectos.filter((proyecto) => 
+      proyecto.disponibilidad === true && 
       proyecto.titulo.toLowerCase().includes(texto.toLowerCase())
     );
   };
 
-  // agregamos esto para que el router pueda buscar el proyecto por id
   const obtenerProyectoPorId = (id) => {
     return proyectos.find((proyecto) => proyecto.id === parseInt(id));
   };
