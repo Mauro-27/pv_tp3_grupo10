@@ -4,7 +4,7 @@ export const proyectoService = (() => {
       id:1,
       titulo:"Curso Inicial de HTML",
       categoria: "Programacion",
-      estado:"Activo",
+      estado:"Completado",
       disponibilidad: true,
       descripcion:"En este proyecto se busca que los estudiantes aprendan conceptos basicos de HTML5",
       recursos:{
@@ -58,7 +58,7 @@ export const proyectoService = (() => {
       id: 4,
       titulo: "Laboratorio Virtual de Ciencias",
       categoria: "Ciencias",
-      estado: "Activo",
+      estado: "Completado",
        disponibilidad: true,
       descripcion: "Simulador interactivo para realizar experimentos de química y física de forma segura desde la computadora.\nPermite mezclar sustancias virtuales y visualizar las reacciones simuladas en tiempo real sin riesgos físicos.",
       recursos: {

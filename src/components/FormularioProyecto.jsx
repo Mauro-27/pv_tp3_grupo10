@@ -63,7 +63,6 @@ const FormularioProyecto = ({ onAgregarProyecto }) => {
           <TextField label="Categoría (ej: Robótica)" name="categoria" value={categoria} onChange={manejarCambio} required />
           <TextField select label="Estado" name="estado" value={estado} onChange={manejarCambio}>
             <MenuItem value="Activo">Activo</MenuItem>
-            <MenuItem value="En Progreso">En Progreso</MenuItem>
             <MenuItem value="Completado">Completado</MenuItem>
           </TextField>
         </div>
