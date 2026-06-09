@@ -1,0 +1,10 @@
+.login-tarjeta {
+    border-radius: 12px;
+    border: 1px solid var(--border-color);
+}
+
+.login-formulario {
+    margin-top: 20px;
+    display: flex;
+    flex-direction: column;
+}

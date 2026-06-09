@@ -7,33 +7,37 @@ import Dashboard from './views/Dashboard';
 import ListaProyectos from './views/ListaProyectos';
 import DetalleProyecto from './views/DetalleProyecto';
 import PerfilUsuario from './views/PerfilUsuario';
+
+import { ProveedorAutorizaciones } from './context/AutorizacionesContext'; 
 import './css/App.css'; 
 
 function App() {
   return (
-    <BrowserRouter>
-      <CssBaseline />
-      
-      <div className="app-contenedor-principal">
-        <Header />
+    <ProveedorAutorizaciones>
+      <BrowserRouter>
+        <CssBaseline />
         
-        <Nav /> 
-        
-        <main className="app-contenido-principal">
-          <Container maxWidth="lg">
-            <Routes>
-              <Route path="/" element={<Navigate to="/dashboard" />} />
-              <Route path="/dashboard" element={<Dashboard />} />
-              <Route path="/proyectos" element={<ListaProyectos />} />
-              <Route path="/proyectos/:id" element={<DetalleProyecto />} />
-              <Route path="/perfil" element={<PerfilUsuario />} />
-            </Routes>
-          </Container>
-        </main>
+        <div className="app-contenedor-principal">
+          <Header />
+          
+          <Nav /> 
+          
+          <main className="app-contenido-principal">
+            <Container maxWidth="lg">
+              <Routes>
+                <Route path="/" element={<Navigate to="/dashboard" />} />
+                <Route path="/dashboard" element={<Dashboard />} />
+                <Route path="/proyectos" element={<ListaProyectos />} />
+                <Route path="/proyectos/:id" element={<DetalleProyecto />} />
+                <Route path="/perfil" element={<PerfilUsuario />} />
+              </Routes>
+            </Container>
+          </main>
 
-        <Footer />
-      </div>
-    </BrowserRouter>
+          <Footer />
+        </div>
+      </BrowserRouter>
+    </ProveedorAutorizaciones>
   );
 }
 
