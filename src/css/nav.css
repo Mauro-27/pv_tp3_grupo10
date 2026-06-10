@@ -9,10 +9,12 @@
   display: flex;
   flex-direction: row; 
   justify-content: center; 
+  align-items: center; 
   gap: 16px;
   padding: 12px 24px;
   margin: 0;
   list-style: none;
+  position: relative; 
 }
 
 .nav-item-lista {
@@ -28,6 +30,10 @@
   text-decoration: none;
   font-weight: 500;
   display: inline-block;
+  
+  border: none;
+  font-family: inherit;
+  font-size: 1rem;
 }
 
 .nav-boton:hover {
@@ -39,6 +45,24 @@
   color: #ffffff !important;
 }
 
+
+
+.nav-item-salir {
+  position: absolute; 
+  right: 24px; 
+}
+
+.nav-boton-salir {
+  color: #d32f2f; 
+  font-weight: bold;
+  cursor: pointer;
+}
+
+.nav-boton-salir:hover {
+  background-color: #fee2e2; 
+}
+
+
 @media (max-width: 600px) {
   .nav-lista {
     flex-direction: column;
@@ -48,5 +72,10 @@
   
   .nav-boton {
     text-align: center;
+  }
+
+  .nav-item-salir {
+    position: static;
+    margin-top: 16px;
   }
 }
