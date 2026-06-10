@@ -19,7 +19,7 @@ function RutasApp() {
       <Route path="/" element={<Navigate to="/dashboard" />} />
       <Route path="/dashboard" element={<Dashboard />} />
       
-      {/* Si el usuario está activo, habilitamos el acceso a proyectos y perfil */}
+      {/* se muestran las rutas ocultas solo si iniciaron sesion */}
       {usuarioActivo && (
         <>
           <Route path="/proyectos" element={<ListaProyectos />} />
@@ -28,7 +28,7 @@ function RutasApp() {
         </>
       )}
       
-      {/* Ruta comodín: Cualquier ruta inválida (o inaccesible) te manda al Dashboard */}
+      {/* se obtienen las rutas inexistentes y se devuelve al inicio */}
       <Route path="*" element={<Navigate to="/dashboard" replace />} />
     </Routes>
   );

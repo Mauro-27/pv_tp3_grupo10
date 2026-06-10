@@ -24,13 +24,18 @@ const Dashboard = () => {
   const [error, setError] = useState('');
 
   const manejarLogin = async (e) => {
+    // se evita que la pagina recargue al enviar
     e.preventDefault();
     setError('');
     try {
+      // enviamos usuario y clave al servicio de autenticacion
       const data = await autorizacionesService.login(usuario, password);
+      // si es correcto guardamos la sesion en el contexto global
       guardarSesion(data);
+      // mandamos al usuario a ver los proyectos si todo ok
       navigate('/proyectos'); 
     } catch (err) {
+      // capturamos el error si las credenciales son invalidas
       setError(err.message);
     }
   };
@@ -40,7 +45,7 @@ const Dashboard = () => {
       
       <Grid container spacing={6} sx={{alignItems: "center"}}>
         
-        {/* COLUMNA IZQUIERDA: DASHBOARD */}
+        {/* seccion izquierda con estadisticas */}
         <Grid xs={12} md={6}>
           <Typography variant="h4" component="h2" gutterBottom fontWeight="600" color="primary">
              Dashboard
@@ -75,7 +80,7 @@ const Dashboard = () => {
           </Box>
         </Grid>
 
-        {/* COLUMNA DERECHA: LOGIN */}
+        {/* seccion derecha con formulario de ingreso */}
         <Grid xs={12} md={6}>
           <Card className="login-tarjeta" elevation={3}>
             <CardContent sx={{ p: 4 }}>
